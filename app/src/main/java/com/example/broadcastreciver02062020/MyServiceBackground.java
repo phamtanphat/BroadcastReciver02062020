@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.util.Log;
+import android.widget.Toast;
 
 public class MyServiceBackground extends BroadcastReceiver {
     @Override
@@ -17,9 +19,13 @@ public class MyServiceBackground extends BroadcastReceiver {
         final android.net.NetworkInfo mobile = connMgr
                 .getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
 
-        if (wifi.isAvailable() || mobile.isAvailable()) {
+        if (wifi.isAvailable()) {
             // Do something
-            
+            Toast.makeText(context, "Wifi connect", Toast.LENGTH_SHORT).show();
+        } else if (mobile.isAvailable()){
+            Toast.makeText(context, "mobile connect", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Disconnect", Toast.LENGTH_SHORT).show();
         }
     }
 }
